@@ -46,6 +46,7 @@ class Graph(object):
         Edges are represented as sets with one (a loop back to the vertex) 
         or two with one (a loop back to the vertex) or two vertices. 
         :return (list): list of sets, where each set is an edge - two nodes of an edge. 
+        """
 
         edges = list() 
 
