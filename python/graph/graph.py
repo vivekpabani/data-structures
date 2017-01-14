@@ -40,6 +40,44 @@ class Graph(object):
 
         return self.__generate_edges()
 
+    def add_vertex(self, vertex):
+        """
+        Add the given vertex to the graph, if it doesn't already exists.
+        :param vertex(str): the vertex to be added
+        """
+
+        if vertex not in self.__graph_dict.keys():
+            self.__graph_dict[vertex] = []
+
+    def add_edge(self, edge):
+        """
+        Add the given edge to the graph.
+        If any of the vertices don't exist, initialize them and add the edge.
+        :param edge(tuple, set or list): the edge to be added.
+        """
+
+        edge = set(edge)
+
+        vertex1 = edge.pop()
+        if edge:
+            # not a self loop. have two nodes.
+            vertex2 = edge.pop()
+        else:
+            # self loop. 
+            vertex2 = vertex1
+
+        # add the vertex2 to vertex1's neighbours.
+        if vertex1 in self.__graph_dict:
+            self.__graph_dict[vertex1].append(vertex2)
+        else:
+            self.__graph_dict[vertex1] = [vertex2]
+
+        # add the vertex1 to vertex2's neighbours.
+        if vertex2 in self.__graph_dict:
+            self.__graph_dict[vertex2].append(vertex1)
+        else:
+            self.__graph_dict[vertex2] = [vertex1]
+
     def __generate_edges(self):
         """
         Generate the edges of the graph by going through the graph_dict.
