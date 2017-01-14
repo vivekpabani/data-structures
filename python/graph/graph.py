@@ -12,7 +12,7 @@ __author__ = "vivek"
 
 class Graph(object):
 
-    def __init__(self, graph_dict = None)
+    def __init__(self, graph_dict = None):
         """
         Initialize the graph object with graph_dict.
         :param graph_dict (str, list): dictionary in form of (node, list_of_nodes)
