@@ -46,7 +46,7 @@ class Graph(object):
         :param vertex(str): the vertex to be added
         """
 
-        if vertex not in self.__graph_dict.keys():
+        if vertex not in self.__graph_dict:
             self.__graph_dict[vertex] = []
 
     def add_edge(self, edge):
@@ -88,7 +88,7 @@ class Graph(object):
 
         edges = list() 
 
-        for vertex in self.__graph_dict.keys():
+        for vertex in self.__graph_dict:
             for neighbour in self.__graph_dict[vertex]:
                 # if the reverse edge does not exist already
                 # then add the current one. 
@@ -105,7 +105,7 @@ class Graph(object):
         """
 
         result = "vertices:\n"
-        for vertex in self.__graph_dict.keys():
+        for vertex in self.__graph_dict:
             result = result + str(vertex) + " "
 
         result = result + "\n\nEdges:\n"
