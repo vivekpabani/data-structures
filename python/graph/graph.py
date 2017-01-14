@@ -4,6 +4,12 @@
 A simple graph class with some of the essential 
 functionalities of graphs.
 
+Implemented functionalities:
+- get the list of vertices.
+- get the list of edges.
+- add a vertex.
+- add an edge. 
+
 """
 
 __author__ = "vivek"
@@ -113,3 +119,5 @@ class Graph(object):
             result = result + str(edge) + " "
 
         return result
+
+
