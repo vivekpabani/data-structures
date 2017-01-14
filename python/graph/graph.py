@@ -30,7 +30,7 @@ class Graph(object):
         :return (list): the vertices of the graph
         """
 
-        return self.__graph_dict.keys()
+        return list(self.__graph_dict.keys())
 
     def edges(self):
         """
