@@ -159,3 +159,47 @@ class Graph(object):
                     return updated_path
 
         return None
+
+    def find_all_paths(self, start_vertex, end_vertex, path = None):
+        """
+        Find all paths between given start and end vertex. 
+        Return None if no path exists.
+        :param start_vertex (str): the start vertex.
+        :param end_vertex (str): the end vertex.
+        :param path (list): the path from source to destination. None by default.
+
+        :return (list): paths as a list of list.
+        """ 
+
+        # initialize path list for the first iteration/call.
+        if path is None:
+            path = list()
+
+        # invalid vertices.
+        if start_vertex not in self.__graph_dict or end_vertex not in self.__graph_dict:
+            return [] 
+
+        # add the current vertex to path, and see if we reached the destination.
+        # if yes, return it in a list.
+        
+        path = path + [start_vertex]
+
+        if start_vertex == end_vertex:
+            return [path]
+
+        # otherwise for each vertex in the neighbour list of current vertex
+        # if it is not already on path, consider it for next call.
+        # call find_path recursively with current vertex as the start vertex
+        # and check if that leads us to the end_vertex.
+        # when that happens, the path list will be returned by the call, and recursion terminates.
+
+        all_paths = list()
+
+        for vertex in self.__graph_dict[start_vertex]:
+            if vertex not in path:
+                updated_paths = self.find_all_paths(vertex, end_vertex, path)
+                if updated_paths:
+                    for p in updated_paths:
+                        all_paths.append(p) 
+
+        return all_paths
