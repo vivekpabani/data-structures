@@ -203,3 +203,65 @@ class Graph(object):
                         all_paths.append(p) 
 
         return all_paths
+
+    def depth_first_search(self, start_vertex, impl_type = "iter"):
+        """
+        depth first search calling function based on asked implementation type.
+        :param start_vertex (str): the vertex from where to start the search/iteration.
+        :param impl_type (str): type of implemention. default value is iterative.  
+        """
+
+        if impl_type == "rec":
+            return self.depth_first_search_rec(start_vertex)
+        else:
+            return self.depth_first_search_iter(start_vertex)
+
+    def depth_first_search_iter(self, start_vertex):
+        """
+        Traverse the graph depth first iteratively starting from given vertex.
+        and record all the vertex on the connected component.
+        :param start_vertex (str): the vertex from where to start the search/iteration.
+
+        :return (list): list of nodes on the search path. 
+        """
+
+        visited = list() 
+        # in depth first search, first we mark the current node as visited. 
+        # then we add all its neighbours, which we didn't visit before to a list
+        # next we pick one of them for next iteration.
+        # thus everytime we pick the node from last node's neighbours.
+        # so last in first out - for which we use the list as a stack.
+        # repeat this until stack has nodes.
+
+        stack = [start_vertex]
+
+        while stack:
+            vertex = stack.pop()
+
+            if vertex not in visited:
+                visited.append(vertex)
+                not_visited_neighbours = [node for node in self.__graph_dict[vertex] if node not in visited]
+                stack.extend(not_visited_neighbours)
+
+        return visited
+
+    def depth_first_search_rec(self, start_vertex, visited = None):
+        """
+        Traverse the graph depth first recursively starting from given vertex.
+        and record all the vertex on the connected component.
+        :param start_vertex (str): the vertex from where to start the search/iteration.
+        :param visited (list): list of already visited nodes on search path. default value None.
+
+        :return (list): list of nodes on the search path.
+        """
+        if visited is None:
+            visited = list()
+
+        visited.append(start_vertex)
+
+        not_visited_neighbours = [node for node in self.__graph_dict[start_vertex] if node not in visited]
+
+        for next_vertex in not_visited_neighbours:
+            self.depth_first_search_rec(next_vertex, visited)
+ 
+        return visited
